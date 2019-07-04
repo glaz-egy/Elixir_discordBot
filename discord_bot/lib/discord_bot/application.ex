@@ -18,8 +18,7 @@ defmodule DiscordBot.Application do
     Cogs.def play(url) do
       {:ok, guild_id} = Cogs.guild_id()
       music_channel = Application.get_env(:discord_bot, :music_channel)
-      tracks = String.split(url, "!")
-      Alchemy.Voice.join(guild_id, music_channel)
+      Alchemy.Voice.join(guild_id, music_channel[guild_id])
       Alchemy.Voice.play_url(guild_id, url, [{:vol, 10}])
       Cogs.say "Now playing #{tracks}"
     end
